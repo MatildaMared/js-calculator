@@ -5,7 +5,7 @@ const display = document.querySelector(".result");
 let currentInput = "";
 
 // The saved input
-let savedInput = "";
+let savedInput = "0";
 
 // Current operator
 let currentOperator = "";
@@ -48,18 +48,18 @@ const displayAndReset = function () {
 
 // Computes the current calculation and calls the displayAndReset function to show the result and resets the variables
 const calcResult = function () {
-	if (savedInput) {
-		if (currentOperator === "add") {
-			result = parseInt(savedInput) + parseInt(currentInput);
+    if (savedInput) {
+        if (currentOperator === "add") {
+			result = Number(savedInput) + Number(currentInput);
 			displayAndReset();
 		} else if (currentOperator === "subtract") {
-			result = parseInt(savedInput) - parseInt(currentInput);
+			result = Number(savedInput) - Number(currentInput);
 			displayAndReset();
 		} else if (currentOperator === "multiply") {
-			result = savedInput * parseInt(currentInput);
+			result = Number(savedInput) * Number(currentInput);
 			displayAndReset();
 		} else if (currentOperator === "divide") {
-			result = parseInt(savedInput) / parseInt(currentInput);
+			result = Number(savedInput) / Number(currentInput);
 			displayAndReset();
 		}
     } else {
@@ -71,6 +71,7 @@ const calcResult = function () {
 // Saves the current input and chosen operator in variables and sets currentInput valuable to empty again
 operators.forEach((operator) => {
     operator.addEventListener("click", (e) => {
+        console.log(`The saved input is ${savedInput}. The current input is ${currentInput}. The current operator is ${currentOperator}`);
         calcResult();
         currentOperator = e.target.id;
 	});
