@@ -6,7 +6,8 @@ html {
 }
 
 body {
-    background-color: mediumpurple;
+    background-color: var(--color-background);
+    color: var(--color-font);
     margin: 0;
     padding: 0;
     font-family: var(--font-primary);
@@ -22,10 +23,12 @@ body {
     padding: 4rem 0;
     background-color: rgba(0, 0, 0, .1);
     width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
 
     .heading-primary {
         margin: 0;
-        color: rgba(255, 255, 255, .8);
         font-size: 3rem;
         text-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
         text-align: center;
@@ -41,7 +44,7 @@ body {
 }
 
 .calculator {
-    background-color: gray;
+    background-color: var(--color-calculator);
     width: 30rem;
     height: 45rem;
     display: grid;
@@ -60,6 +63,10 @@ body {
         &:hover {
             background-color: #cccccc;
         }
+    }
+
+    .operator {
+        background-color: var(--color-operators);
     }
 
     .result {
@@ -144,5 +151,29 @@ body {
         text-align: center;
         color: rgba(255, 255, 255, .6);
         font-size: 1.3rem;
+    }
+}
+
+// Themes
+.themes {
+    &__list {
+        list-style-type: none;
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: absolute;
+        top: 100%;
+        right: 0;
+    }
+
+    &__item {
+        cursor: pointer;
+        padding-left: 0;
+        padding-right: 1rem;
+
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
     }
 }

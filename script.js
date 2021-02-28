@@ -86,3 +86,27 @@ compute.addEventListener("click", () => {
 clear.addEventListener("click", () => {
 	displayAndReset();
 });
+
+// Themes colors
+const themes = {
+	defaultIsBoring: ["mediumpurple", "rgba(255, 255, 255, .8)", "rgb(94, 61, 161)", "rgb(206, 124, 162)"],
+	iceCreamTuesday: ["lemonchiffon", "rgba(0, 0, 0, .7)", "palegreen", "blue"],
+};
+
+// Get the root element where the CSS variables is
+const root = document.querySelector(":root");
+
+// Themes switcher
+const changeTheme = function (colorBackground, colorFont, colorCalculator, colorOperators) {
+	root.style.setProperty("--color-background", colorBackground);
+	root.style.setProperty("--color-font", colorFont);
+	root.style.setProperty("--color-calculator", colorCalculator);
+	root.style.setProperty("--color-operators", colorOperators);
+};
+
+const themesLinks = document.querySelectorAll("li.themes__item");
+themesLinks.forEach(link => {
+	link.addEventListener("click", e => {
+		changeTheme(...themes[e.target.id]);
+	})
+});

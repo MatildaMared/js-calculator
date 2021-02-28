@@ -9,9 +9,22 @@
 </head>
 <body>
     <div class="container">
+
         <header class="header">
             <h1 class="heading-primary">Awesome Javascript Calculator! 🌟</h1>
+            <input type="checkbox" name="theme-nav" id="theme-nav">
+            <label for="theme-nav">Change the theme! 🤩</label>
+            <nav class="themes">
+                <ul class="themes__list">
+                    <li class="themes__item" id="defaultIsBoring">defaultIsBoring</li>
+                    <li class="themes__item" id="iceCreamTuesday">iceCreamTuesday</li>
+                    <li class="themes__item" id="funnyHatsFriday">funnyHatsFriday</li>
+                    <li class="themes__item" id="javascriptIsFun">javascriptIsFun</li>
+                    <li class="themes__item" id="needMoreCoffee">needMoreCoffee</li>
+                </ul>
+            </nav>
         </header>
+        
         <main class="main">
             <section class="calculator">
                 <div class="result"></div>
@@ -35,9 +48,11 @@
                 <button class="compute">=</button>
             </section>
         </main>
+
         <footer class="footer">
             <p class="footer__copyright">&copy; Matilda Mared 2021</p>
         </footer>
+
         <script src="script.js"></script>
     </div>
 </body>
