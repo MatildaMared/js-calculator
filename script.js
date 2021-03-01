@@ -5,7 +5,7 @@ const display = document.querySelector(".result");
 let currentInput = "";
 
 // The saved input
-let savedInput = "0";
+let savedInput = "";
 
 // Current operator
 let currentOperator = "";
@@ -31,6 +31,9 @@ numbers.forEach((number) => {
 		let input = number.innerHTML;
 		currentInput += input;
 		display.textContent = currentInput;
+		operators.forEach((operator) => {
+			operator.classList.remove("active");
+		});
 	});
 });
 
@@ -59,21 +62,26 @@ const calcResult = function () {
 			result = Number(savedInput) * Number(currentInput);
 			displayAndReset();
 		} else if (currentOperator === "divide") {
-			result = Number(savedInput) / Number(currentInput);
+			if (!Number(currentInput) || !Number(savedInput)) {
+				result = 0;
+			} else {
+				result = Number(savedInput) / Number(currentInput);
+			}
 			displayAndReset();
 		}
     } else {
         savedInput = currentInput;
-        currentInput = "";
+		currentInput = "";
     }
 };
 
 // Saves the current input and chosen operator in variables and sets currentInput valuable to empty again
 operators.forEach((operator) => {
-    operator.addEventListener("click", (e) => {
-        console.log(`The saved input is ${savedInput}. The current input is ${currentInput}. The current operator is ${currentOperator}`);
-        calcResult();
-        currentOperator = e.target.id;
+	operator.addEventListener("click", (e) => {
+		console.log(`The saved input is ${savedInput}. The current input is ${currentInput}. The current operator is ${currentOperator}`);
+		calcResult();
+		currentOperator = e.target.id;
+		operator.classList.add("active");
 	});
 });
 
@@ -89,19 +97,23 @@ clear.addEventListener("click", () => {
 
 // Themes colors
 const themes = {
-	defaultIsBoring: ["mediumpurple", "rgba(255, 255, 255, .8)", "rgb(94, 61, 161)", "rgb(206, 124, 162)"],
+	defaultIsBoring: ["#58748C", "#7B92A6", "#9AABBB", "rgba(255, 255, 255, .7)", "#EADBDB", "#D9B0B0", "#c59595"],
 	iceCreamTuesday: ["lemonchiffon", "rgba(0, 0, 0, .7)", "palegreen", "blue"],
+	needMoreCoffee: ["#4D3F35", "#B39C7D", "#DBCDAD", "rgba(255, 255, 255, .7)", "#9ED1CF", "#72BAB8", "#62A3A1"],
 };
 
 // Get the root element where the CSS variables is
 const root = document.querySelector(":root");
 
 // Themes switcher
-const changeTheme = function (colorBackground, colorFont, colorCalculator, colorOperators) {
-	root.style.setProperty("--color-background", colorBackground);
+const changeTheme = function (colorDark, colorPrimary, colorPrimaryLight, colorFont, colorAccentLight, colorAccent, colorAccentDark) {
+	root.style.setProperty("--color-dark", colorDark);
+	root.style.setProperty("--color-primary", colorPrimary);
+	root.style.setProperty("--color-primary-light", colorPrimaryLight);
 	root.style.setProperty("--color-font", colorFont);
-	root.style.setProperty("--color-calculator", colorCalculator);
-	root.style.setProperty("--color-operators", colorOperators);
+	root.style.setProperty("--color-accent-light", colorAccentLight);
+	root.style.setProperty("--color-accent", colorAccent);
+	root.style.setProperty("--color-accent-dark", colorAccentDark);
 };
 
 const themesLinks = document.querySelectorAll("li.themes__item");
@@ -110,3 +122,20 @@ themesLinks.forEach(link => {
 		changeTheme(...themes[e.target.id]);
 	})
 });
+
+// Closes drop-down menu if user clicks somewhere
+const checkbox = document.querySelector(".themes__checkbox");
+const label = document.querySelector(".themes__label");
+
+checkbox.addEventListener("click", function () {
+	if (this.checked) {
+		document.addEventListener("click", e => {
+			if (e.target != checkbox && e.target != label) {
+				checkbox.checked = false;
+				document.removeEventListener("click", listener);
+			}	
+		});
+	}
+});
+
+console.log(55/0);

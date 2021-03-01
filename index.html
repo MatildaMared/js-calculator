@@ -12,9 +12,9 @@
 
         <header class="header">
             <h1 class="heading-primary">Awesome Javascript Calculator! 🌟</h1>
-            <input type="checkbox" name="theme-nav" id="theme-nav">
-            <label for="theme-nav">Change the theme! 🤩</label>
             <nav class="themes">
+                <input type="checkbox" class="themes__checkbox" id="themes__checkbox">
+                <label for="themes__checkbox" class="themes__label">Change the theme! 🤩</label>
                 <ul class="themes__list">
                     <li class="themes__item" id="defaultIsBoring">defaultIsBoring</li>
                     <li class="themes__item" id="iceCreamTuesday">iceCreamTuesday</li>
@@ -44,7 +44,7 @@
                 <button class="operator" id="subtract">-</button>
                 <button class="operator" id="multiply">&times;</button>
                 <button class="operator" id="divide">/</button>
-                <button class="decimal">,</button>
+                <button class="number" id="decimal">,</button>
                 <button class="compute">=</button>
             </section>
         </main>
