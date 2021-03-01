@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,900;1,100;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400&display=swap');
 
 html {
@@ -21,21 +21,22 @@ body {
 }
 
 .header {
-    padding: 1.5rem;
+    padding: 3rem 0rem;
     background-color: var(--color-dark);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
 
     .heading-primary {
-        font-size: 2rem;
-        letter-spacing: 1px;
+        font-family: var(--font-sans-serif);
+        font-weight: 900;
+        font-style: italic;
+        font-size: 5rem;
         text-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
         text-align: center;
-        margin-bottom: 1rem;
         color: var(--color-light);
+        margin: 0;
     }
 }
 
@@ -161,9 +162,12 @@ body {
     width: 100%;
 
     &__copyright {
+        font-family: var(--font-sans-serif);
+        text-transform: uppercase;
+        letter-spacing: 2px;
         text-align: center;
         color: var(--color-primary-light);
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
 }
 
@@ -171,7 +175,7 @@ body {
 .themes {
 
     &__list {
-        text-align: center;
+        text-align: right;
         position: absolute;
         top: 100%;
         right: 0%;
@@ -183,29 +187,45 @@ body {
         transform: scale(1, 0);
         transform-origin: top;
         transition: transform .4s ease-in-out;
-        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
     }
 
     &__item {
+        display: inline-block;
         opacity: 0;
         font-size: 1.5rem;
         font-weight: 200;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 1rem;
-
-        &:not(:last-child) {
-            padding-bottom: .5rem;
-        }
+        padding: 1rem 1.5rem;
+        margin-right: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:hover {
-            color: var(--color-primary);
+            background-color: var(--color-primary);
+            border-radius: 1.5rem;
+
+            & .heart-icon {
+                fill: rgba(255, 255, 255, .7);
+            }
         }
 
-        &:hover::after, &:hover::before {
-            content: "❤️";
-            margin: 1rem;
-            font-size: 1rem;
+        .heart-icon {
+            margin-left: 1rem;
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            stroke: rgba(255, 255, 255, .7);
+            fill: transparent;
+        }
+
+        &--active .heart-icon {
+            fill: rgba(255, 255, 255, .7);
         }
     }
 
@@ -224,16 +244,37 @@ body {
         &:checked ~ .themes__label {
             letter-spacing: 3px;
             font-weight: 400;
-            color: var(--color-primary);
+            transform: rotate(-6deg);
+            background-color: var(--color-accent);
         }
     }
 
     &__label {
-        position: relative;
+        position: absolute;
+        right: 2rem;
+        top: 35%;
         font-weight: 200;
         font-size: 1.5rem;
         cursor: pointer;
         transition: all .4s;
         color: var(--color-light);
+        background-color: var(--color-primary);
+        padding: 1rem 3rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+        display: flex;
+        align-items: center;
+
+        &::before {
+            content: "🤩";
+            font-size: 2rem;
+            color: #FFF;
+            margin-right: 1rem;
+        }
+
+        &:hover {
+            background-color: var(--color-accent-dark);
+            transform: translateY(-3px);
+        }
     }
 }

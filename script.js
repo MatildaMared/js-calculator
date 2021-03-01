@@ -97,9 +97,33 @@ clear.addEventListener("click", () => {
 
 // Themes colors
 const themes = {
-	defaultIsBoring: ["#58748C", "#7B92A6", "#9AABBB", "rgba(255, 255, 255, .7)", "#EADBDB", "#D9B0B0", "#c59595"],
-	iceCreamTuesday: ["lemonchiffon", "rgba(0, 0, 0, .7)", "palegreen", "blue"],
-	needMoreCoffee: ["#4D3F35", "#B39C7D", "#DBCDAD", "rgba(255, 255, 255, .7)", "#9ED1CF", "#72BAB8", "#62A3A1"],
+	defaultIsBoring: [
+		"#58748C",
+		"#7B92A6",
+		"#9AABBB",
+		"rgba(255, 255, 255, .7)",
+		"#EADBDB",
+		"#D9B0B0",
+		"#c59595",
+	],
+	iceCreamTuesday: [
+		"#8784aa",
+		"#81b6b2",
+		"#F1D6F1",
+		"#EEF6C3",
+		"#EEF6C3",
+		"#F4C1F2",
+		"#da96d7",
+	],
+	needMoreCoffee: [
+		"#4D3F35",
+		"#8b7a62",
+		"#DBCDAD",
+		"rgba(255, 255, 255, .7)",
+		"#9ED1CF",
+		"#72BAB8",
+		"#62A3A1",
+	],
 };
 
 // Get the root element where the CSS variables is
@@ -119,6 +143,11 @@ const changeTheme = function (colorDark, colorPrimary, colorPrimaryLight, colorF
 const themesLinks = document.querySelectorAll("li.themes__item");
 themesLinks.forEach(link => {
 	link.addEventListener("click", e => {
+		themesLinks.forEach(li => {
+			li.classList.remove("themes__item--active");
+		})
+		console.log(e.target);
+		e.target.classList.add("themes__item--active");
 		changeTheme(...themes[e.target.id]);
 	})
 });
@@ -132,10 +161,7 @@ checkbox.addEventListener("click", function () {
 		document.addEventListener("click", e => {
 			if (e.target != checkbox && e.target != label) {
 				checkbox.checked = false;
-				document.removeEventListener("click", listener);
 			}	
 		});
 	}
 });
-
-console.log(55/0);

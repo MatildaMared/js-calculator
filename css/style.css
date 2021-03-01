@@ -1,8 +1,9 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,900;1,100;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400&display=swap");
 :root {
   --font-primary: 'Oxanium', cursive;
+  --font-sans-serif: "Lato", sans-serif;
   --color-dark: #58748C;
   --color-primary: #7B92A6;
   --color-primary-light: #9aabbb;
@@ -35,15 +36,11 @@ body {
 }
 
 .header {
-  padding: 1.5rem;
+  padding: 3rem 0rem;
   background-color: var(--color-dark);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -54,12 +51,14 @@ body {
 }
 
 .header .heading-primary {
-  font-size: 2rem;
-  letter-spacing: 1px;
+  font-family: var(--font-sans-serif);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 5rem;
   text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   text-align: center;
-  margin-bottom: 1rem;
   color: var(--color-light);
+  margin: 0;
 }
 
 .main {
@@ -244,13 +243,16 @@ body {
 }
 
 .footer__copyright {
+  font-family: var(--font-sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 2px;
   text-align: center;
   color: var(--color-primary-light);
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .themes__list {
-  text-align: center;
+  text-align: right;
   position: absolute;
   top: 100%;
   right: 0%;
@@ -267,31 +269,62 @@ body {
   transition: -webkit-transform .4s ease-in-out;
   transition: transform .4s ease-in-out;
   transition: transform .4s ease-in-out, -webkit-transform .4s ease-in-out;
-  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .themes__item {
+  display: inline-block;
   opacity: 0;
   font-size: 1.5rem;
   font-weight: 200;
   cursor: pointer;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 1rem;
-}
-
-.themes__item:not(:last-child) {
-  padding-bottom: .5rem;
+  padding: 1rem 1.5rem;
+  margin-right: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .themes__item:hover {
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  border-radius: 1.5rem;
 }
 
-.themes__item:hover::after, .themes__item:hover::before {
-  content: "❤️";
-  margin: 1rem;
-  font-size: 1rem;
+.themes__item:hover .heart-icon {
+  fill: rgba(255, 255, 255, 0.7);
+}
+
+.themes__item .heart-icon {
+  margin-left: 1rem;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  stroke: rgba(255, 255, 255, 0.7);
+  fill: transparent;
+}
+
+.themes__item--active .heart-icon {
+  fill: rgba(255, 255, 255, 0.7);
 }
 
 .themes__checkbox {
@@ -314,16 +347,44 @@ body {
 .themes__checkbox:checked ~ .themes__label {
   letter-spacing: 3px;
   font-weight: 400;
-  color: var(--color-primary);
+  -webkit-transform: rotate(-6deg);
+          transform: rotate(-6deg);
+  background-color: var(--color-accent);
 }
 
 .themes__label {
-  position: relative;
+  position: absolute;
+  right: 2rem;
+  top: 35%;
   font-weight: 200;
   font-size: 1.5rem;
   cursor: pointer;
   -webkit-transition: all .4s;
   transition: all .4s;
   color: var(--color-light);
+  background-color: var(--color-primary);
+  padding: 1rem 3rem;
+  border-radius: 1.5rem;
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.themes__label::before {
+  content: "🤩";
+  font-size: 2rem;
+  color: #FFF;
+  margin-right: 1rem;
+}
+
+.themes__label:hover {
+  background-color: var(--color-accent-dark);
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
 }
 /*# sourceMappingURL=style.css.map */
