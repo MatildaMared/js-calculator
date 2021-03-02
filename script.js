@@ -1,31 +1,75 @@
-// The display
-const display = document.querySelector(".result");
+// ################# VARIABLE DECLARATIONS ################### //
 
-// The number that is to be shown in the calculator display
-let currentInput = "";
+const display = document.querySelector(".result"); // The display
+let currentInput = ""; // The current input
+let savedInput = ""; // The saved input
+let currentOperator = ""; // Current operator
+let result = ""; // Computed result to be shown in display
+const operators = document.querySelectorAll(".operator"); // The operators of the calculator
+const numbers = document.querySelectorAll(".number"); // The numbers of the calculator
+const calculate = document.querySelector(".calculate"); // The calculate button
+const clear = document.querySelector(".clear"); // The clear button
+const posOrNeg = document.querySelector(".posOrNeg"); // The +/- button
+const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]; // Valid numbers
+const operatorKeys = ["+", "-", "/", "*"] // Valid operators
+const calculateKey = "="; // Calculate sign
+const root = document.querySelector(":root"); // Get the root element for CSS variables
 
-// The saved input
-let savedInput = "";
 
-// Current operator
-let currentOperator = "";
+// ################# CALCULATOR FUNCTIONALITY ################### //
 
-// Computed result to be shown in display
-let result = "";
+// Shows the result and reset variables after clicking the calculate button
+const displayAndReset = function () {
+	operators.forEach(operator => {
+		operator.classList.remove("active");
+	});
+	if (result.toString().length > 14) {
+		result = result.toFixed(6);
+	}
+	display.innerHTML = result;
+	savedInput = result;
+	currentInput = "";
+	result = "";
+};
 
-// The operators of the calculator
-const operators = document.querySelectorAll(".operator");
 
-// The numbers of the calculator
-const numbers = document.querySelectorAll(".number");
+// Calculates and calls the displayAndReset function to show the result and reset the variables
+const calcResult = function () {
+	if (savedInput !== "" && currentInput !== "") {
+        if (currentOperator === "add") {
+			result = Number(savedInput) + Number(currentInput);
+			displayAndReset();
+		} else if (currentOperator === "subtract") {
+			result = Number(savedInput) - Number(currentInput);
+			displayAndReset();
+		} else if (currentOperator === "multiply") {
+			result = Number(savedInput) * Number(currentInput);
+			displayAndReset();
+		} else if (currentOperator === "divide") {
+			if (currentInput === "0" || savedInput === "0") {
+				result = 0;
+			} else {
+				result = Number(savedInput) / Number(currentInput);
+			}
+			displayAndReset();
+		}
+    } else if(!savedInput) {
+		savedInput = currentInput;
+		currentInput = "";
+    }
+};
 
-// The compute button
-const compute = document.querySelector(".compute");
+// Calls the calcResult function if a user clicks the calculate button
+calculate.addEventListener("click", () => {
+	calcResult();
+});
 
-// The clear button
-const clear = document.querySelector(".clear");
+// Clears the display and variables
+clear.addEventListener("click", () => {
+	displayAndReset();
+});
 
-// Shows the current numbers in the display and updates variable currentInput
+// Display the numbers in the display and updates variable currentInput
 numbers.forEach((number) => {
 	number.addEventListener("click", () => {
 		let input = number.innerHTML;
@@ -37,63 +81,64 @@ numbers.forEach((number) => {
 	});
 });
 
-// Function to show the result and reset variables after clicking the compute button
-const displayAndReset = function () {
-	if (result.toString().length > 14) {
-		result = result.toFixed(6);
-	}
-	display.textContent = result;
-	savedInput = result;
-	currentInput = "";
-    result = "";
-    console.log(savedInput);
-};
-
-// Computes the current calculation and calls the displayAndReset function to show the result and resets the variables
-const calcResult = function () {
-    if (savedInput) {
-        if (currentOperator === "add") {
-			result = Number(savedInput) + Number(currentInput);
-			displayAndReset();
-		} else if (currentOperator === "subtract") {
-			result = Number(savedInput) - Number(currentInput);
-			displayAndReset();
-		} else if (currentOperator === "multiply") {
-			result = Number(savedInput) * Number(currentInput);
-			displayAndReset();
-		} else if (currentOperator === "divide") {
-			if (!Number(currentInput) || !Number(savedInput)) {
-				result = 0;
-			} else {
-				result = Number(savedInput) / Number(currentInput);
-			}
-			displayAndReset();
-		}
-    } else {
-        savedInput = currentInput;
-		currentInput = "";
-    }
-};
-
-// Saves the current input and chosen operator in variables and sets currentInput valuable to empty again
+// Update currentOperator variable
 operators.forEach((operator) => {
 	operator.addEventListener("click", (e) => {
-		console.log(`The saved input is ${savedInput}. The current input is ${currentInput}. The current operator is ${currentOperator}`);
 		calcResult();
 		currentOperator = e.target.id;
 		operator.classList.add("active");
 	});
 });
 
-// Calls the calcResult function if a user clicks the equals button
-compute.addEventListener("click", () => {
-	calcResult();
+// Switch current number to a positive or negative number, update the display and savedInput variable
+posOrNeg.addEventListener("click", () => {
+	let input = display.textContent;
+	input = -input;
+	display.textContent = input;
+	savedInput = input;
+})
+
+// ################# HANDLE KEYBOARD INPUTS ################### //
+
+document.addEventListener("keydown", (e) => {
+	if (operatorKeys.includes(e.key)) {
+		if (e.key === "+") {
+			calcResult();
+			currentOperator = "add";
+			document.getElementById("add").classList.add("active");
+		} else if (e.key === "-") {
+			calcResult();
+			currentOperator = "subtract";
+			document.getElementById("subtract").classList.add("active");
+		} else if (e.key === "*") {
+			calcResult();
+			currentOperator = "multiply";
+			document.getElementById("multiply").classList.add("active");
+		} else if (e.key === "/") {
+			calcResult();
+			currentOperator = "divide";
+			document.getElementById("divide").classList.add("active");
+		}
+	} else if (numberKeys.includes(e.key)) {
+		let input = e.key;
+		currentInput += input;
+		display.textContent = currentInput;
+		operators.forEach((operator) => {
+			operator.classList.remove("active");
+		});
+	}
 });
 
-// Clears the display and variables
-clear.addEventListener("click", () => {
-	displayAndReset();
+document.addEventListener("keyup", (e) => {
+	if (e.key === "Escape") {
+		displayAndReset();
+	} else if (e.key === "Enter") {
+		calcResult();
+	}
 });
+
+
+// ################# COLOR THEMES FUNCTIONALITY ################### //
 
 // Themes colors
 const themes = {
@@ -107,13 +152,13 @@ const themes = {
 		"#c59595",
 	],
 	iceCreamTuesday: [
-		"#8784aa",
-		"#81b6b2",
-		"#F1D6F1",
-		"#EEF6C3",
-		"#EEF6C3",
-		"#F4C1F2",
-		"#da96d7",
+		"#A080E8",
+		"#BEA2FF",
+		"#E5C2FF",
+		"rgba(255, 255, 255, .7)",
+		"#ACECE8",
+		"#75E6DE",
+		"#52B4AE",
 	],
 	needMoreCoffee: [
 		"#4D3F35",
@@ -124,10 +169,25 @@ const themes = {
 		"#72BAB8",
 		"#62A3A1",
 	],
+	funnyHatsFriday: [
+		"#460273",
+		"#7C17BF",
+		"#9F4DD6",
+		"rgba(255, 255, 255, .7)",
+		"#FFEF9D",
+		"#F2D22E",
+		"#F2B705",
+	],
+	javascriptIsFun: [
+		"#323232",
+		"#3c3c3c",
+		"#545454",
+		"rgba(255, 255, 255, .6)",
+		"#E7BE64",
+		"#DE9700",
+		"#C98900",
+	]
 };
-
-// Get the root element where the CSS variables is
-const root = document.querySelector(":root");
 
 // Themes switcher
 const changeTheme = function (colorDark, colorPrimary, colorPrimaryLight, colorFont, colorAccentLight, colorAccent, colorAccentDark) {

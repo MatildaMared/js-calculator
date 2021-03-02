@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awesome Javascript Calculator! 🌟</title>
+    <title>An awesome Javascript calculator.</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
 
         <header class="header">
-            <h1 class="heading-primary">Awesome Javascript Calculator!</h1>
+            <svg xmlns='http://www.w3.org/2000/svg' class='header__icon' viewBox='0 0 512 512'><title>Heart</title><path d='M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg>
+
+            <div class="heading-wrapper">
+                <h1 class="heading-primary">An awesome Javascript calculator.</h1>
+                <p class="heading-subtext">A simple yet utterly effective calculator with the amazing ability to switch color theme with a simpe click.</p>
+            </div>
             <nav class="themes">
                 <input type="checkbox" class="themes__checkbox" id="themes__checkbox">
-                <label for="themes__checkbox" class="themes__label">Click to change theme!</label>
+                <label for="themes__checkbox" class="themes__label">Pick a theme.</label>
                 <ul class="themes__list">
                     <li class="themes__item themes__item--active" id="defaultIsBoring">Default is Boring 
                         <svg xmlns='http://www.w3.org/2000/svg' class='heart-icon' viewBox='0 0 512 512'><title>Heart</title><path d='M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg>
@@ -39,7 +44,7 @@
             <section class="calculator">
                 <div class="result"></div>
                 <button class="clear">C/E</button>
-                <button class="positiveOrNegative">+/-</button>
+                <button class="posOrNeg">+/-</button>
                 <button class="number" id="number-9">9</button>
                 <button class="number" id="number-8">8</button>
                 <button class="number" id="number-7">7</button>
@@ -55,11 +60,24 @@
                 <button class="operator" id="multiply">&times;</button>
                 <button class="operator" id="divide">/</button>
                 <button class="number" id="decimal">.</button>
-                <button class="compute">=</button>
+                <button class="calculate">=</button>
             </section>
         </main>
 
         <footer class="footer">
+            <nav class="footer__nav">
+                <ul class="footer__nav-list">
+                    <li class="footer__nav-item">
+                        <a href="https://github.com/MatildaMared" target="_blank" class="footer__nav-link">GitHub.</a>
+                    </li>
+                    <li class="footer__nav-item">
+                        <a href="https://www.linkedin.com/in/matilda-mared" target="_blank" class="footer__nav-link">LinkedIn.</a>
+                    </li>
+                    <li class="footer__nav-item">
+                        <a href="mailto:matildamared@live.se" class="footer__nav-link">Email.</a>
+                    </li>
+                </ul>
+            </nav>
             <p class="footer__copyright">&copy; Matilda Mared 2021</p>
         </footer>
 
