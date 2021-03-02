@@ -59,6 +59,8 @@ const calcResult = function () {
     }
 };
 
+// ################# HANDLE CLICK INPUTS ################### //
+
 // Calls the calcResult function if a user clicks the calculate button
 calculate.addEventListener("click", () => {
 	calcResult();
@@ -199,6 +201,8 @@ const changeTheme = function (colorDark, colorPrimary, colorPrimaryLight, colorF
 	root.style.setProperty("--color-accent", colorAccent);
 	root.style.setProperty("--color-accent-dark", colorAccentDark);
 };
+
+// ################# DROP DOWN MENU FUNCTIONALITY ################### //
 
 const themesLinks = document.querySelectorAll("li.themes__item");
 themesLinks.forEach(link => {
